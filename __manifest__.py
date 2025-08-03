@@ -2,20 +2,26 @@
 {
     'name': "crm_dashboard_smart",
 
-    'summary': "Short (1 phrase/line) summary of the module's purpose",
-
+    'summary': "Advanced CRM dashboard with KPIs and visual charts",
     'description': """
-Long description of module's purpose
-    """,
+	This module adds a smart CRM dashboard to monitor leads and opportunities.
+	Features:
+	- Total leads count by stage
+	- Bar & pie charts using Chart.js
+	- Responsive UI with animations
+	- Easy access to sales metrics
+	""",
 
-    'author': "OsamaMekky",
+    'author': "Osama Mekky",
     'website': "https://gosmart.eg",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
+    'category': 'Sales',
+
+    'version': '17.0.1.0.0',
+
 
     # any module necessary for this one to work correctly
     'depends': ['base','crm'],
@@ -42,5 +48,9 @@ Long description of module's purpose
     'demo': [
         'demo/demo.xml',
     ],
+
+    'license': 'LGPL-3',
+    'application': True,
+    'installable': True,
 }
 
