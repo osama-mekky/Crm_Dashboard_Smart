@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+  <t t-name="CrmDashborad" owl="1">
+    <section t-attf-class="dashboard-wrapper #{state.theme}-mode py-5 px-3">
+      <div class="container crm-dashboard">
+
+        <!-- Theme Toggle Button -->
+        <div class="mb-4 text-end">
+          <button class="btn btn-outline-secondary" t-on-click="toggleTheme">
+            <t t-if="state.theme === 'light'">🌙 Dark Mode</t>
+            <t t-if="state.theme === 'dark'">☀️ Light Mode</t>
+          </button>
+        </div>
+
+        <!-- Salesperson Filter -->
+        <div class="salesperson-filter mb-4">
+          <div class="dropdown-container">
+            <i class="fas fa-user-circle dropdown-icon"></i>
+            <select t-on-change="onSalespersonChange"
+                    t-ref="salespersonSelect"
+                    class="form-select modern-select">
+              <option value="">All Salespersons</option>
+              <option t-foreach="state.salespersons" t-as="sp" t-key="sp.id" t-att-value="sp.id">
+                <t t-esc="sp.name"/>
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <!-- Compare Salespersons -->
+        <div class="compare-salesperson row mb-4 align-items-end">
+          <div class="col-md-5">
+            <label class="form-label fw-bold text-muted">Salesperson 1</label>
+            <select t-on-change="onCompareUser1" class="form-select shadow-sm rounded">
+              <option  value="">Select Salesperson 1</option>
+              <option t-foreach="state.salespersons" t-as="sp" t-key="sp.id" t-att-value="sp.id">
+                <t t-esc="sp.name"/>
+              </option>
+            </select>
+          </div>
+          <div class="col-md-5">
+            <label class="form-label fw-bold text-muted">Salesperson 2</label>
+            <select t-on-change="onCompareUser2" class="form-select shadow-sm rounded">
+              <option value="">Select Salesperson 2</option>
+              <option t-foreach="state.salespersons" t-as="sp" t-key="sp.id" t-att-value="sp.id">
+                <t t-esc="sp.name"/>
+              </option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary w-100 shadow-sm mt-2" t-on-click="compareSalespersons">
+              <i class="fa fa-balance-scale me-1"></i> Compare
+            </button>
+          </div>
+        </div>
+
+    
+       <!-- Result -->
+      <div t-if="state.comparisonResult">
+        <div class="card shadow border-0 rounded p-4 mb-4 bg-white position-relative">
+
+          <!-- ❌ Close Button -->
+          <button
+            type="button"
+            class="btn-close position-absolute top-0 end-0 m-3"
+            aria-label="Close"
+            t-on-click="closeComparisonResult"
+          ></button>
+
+          <!-- Title -->
+          <div class="text-center mb-4">
+            <h4 class="fw-bold text-dark">🤝 Salesperson Comparison</h4>
+          </div>
+
+          <!-- Main Comparison Section -->
+          <div class="row text-center">
+            <!-- Salesperson 1 -->
+            <div class="col-md-4">
+              <div class="p-3">
+                <div class="bg-primary text-white text-center rounded-pill px-4 py-2 mx-auto mb-2 d-inline-block">
+                  <t t-esc="state.comparisonResult.salesperson_1.name"/>
+                </div>
+                <h5 class="text-primary fw-bold"><t t-esc="state.salespersons.find(s => s.id === state.comparison.salesperson1)?.name"/></h5>
+              </div>
+            </div>
+
+            <!-- Labels -->
+
+            <!-- Middle (empty spacing) -->
+            <div class="col-md-4">
+              <h1 class="text-muted">VS</h1>
+            </div>
+            
+
+            <!-- Salesperson 2 -->
+            <div class="col-md-4">
+              <div class="p-3">
+                <div class="bg-primary text-white text-center rounded-pill px-4 py-2 mx-auto mb-2 d-inline-block">
+                  <t t-esc="state.comparisonResult.salesperson_2.name"/>
+                </div>
+                <h5 class="text-info fw-bold"><t t-esc="state.salespersons.find(s => s.id === state.comparison.salesperson2)?.name"/></h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Row -->
+          <div class="row text-center mt-2">
+            <!-- Salesperson 1 Data -->
+            <div class="col-md-4">
+              <ul class="list-unstyled small text-dark">
+                <li class="py-2 border-bottom"><t t-esc="state.comparisonResult.salesperson_1.total"/></li>
+                <li class="py-2 border-bottom"><t t-esc="state.comparisonResult.salesperson_1.won"/></li>
+                <li class="py-2 border-bottom"><t t-esc="state.comparisonResult.salesperson_1.lost"/></li>
+                <li class="py-2 border-bottom"><t t-esc="state.comparisonResult.salesperson_1.conversion_rate"/>%</li>
+                <li class="py-2 border-bottom"><t t-esc="state.comparisonResult.salesperson_1.expected_revenue"/> EGP</li>
+                <li class="py-2"><t t-esc="state.comparisonResult.salesperson_1.all_revenue"/> EGP</li>
+              </ul>
+            </div>
+
+
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+              <ul class="list-unstyled text-dark small fw-semibold p-0">
+                <li class="py-2 border-bottom">Total Leads</li>
+                <li class="py-2 border-bottom">Won</li>
+                <li class="py-2 border-bottom">Lost</li>
+                <li class="py-2 border-bottom">Conversion Rate</li>
+                <li class="py-2 border-bottom">Expected Revenue</li>
+                <li class="py-2">Revenue</li>
+              </ul>
+            </div>
+
+            
+
+            <!-- Salesperson 2 Data -->
+            <div class="col-md-4">
+              <ul class="list-unstyled small text-dark">
+                <li class="py-2 border-bottom"><t t-esc="state.comparisonResult.salesperson_2.total"/></li>
+                <li class="py-2 border-bottom"><t t-esc="state.comparisonResult.salesperson_2.won"/></li>
+                <li class="py-2 border-bottom"><t t-esc="state.comparisonResult.salesperson_2.lost"/></li>
+                <li class="py-2 border-bottom"><t t-esc="state.comparisonResult.salesperson_2.conversion_rate"/>%</li>
+                <li class="py-2 border-bottom"><t t-esc="state.comparisonResult.salesperson_2.expected_revenue"/> EGP</li>
+                <li class="py-2"><t t-esc="state.comparisonResult.salesperson_2.all_revenue"/> EGP</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Best Performer -->
+          <div class="mt-4 text-center">
+            <h5 class="text-success fw-bold">🏆 Best Performer: <t t-esc="state.bestSalespersonName"/></h5>
+          </div>
+
+        </div>
+      </div>
+
+
+
+        <!-- Total Leads Card (Modern) -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div t-on-click="openTotalLeads"
+                class="card total-leads-modern p-4 animate__animated animate__fadeIn"
+                style="cursor: pointer;">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="lead-label">Total Leads</p>
+                  <h1 class="lead-count">
+                    <t t-esc="state.total_leads"/>
+                  </h1>
+                </div>
+                <div class="icon-badge">
+                  <i class="fa fa-user-tie"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric Cards Grid -->
+        <div class="dashboard-grid">
+
+          <div t-on-click="openOpportunitiesInProgress" class="card metric-card card-primary animate__animated animate__fadeInUp">
+            <i class="fas fa-sync mb-2"></i>
+            <h6>Opportunities In Progress</h6>
+            <h2><t t-esc="state.in_progress"/></h2>
+          </div>
+
+          <div t-on-click="openOpportunitiesThisMonth" class="card metric-card card-accent animate__animated animate__fadeInUp">
+            <i class="fas fa-calendar-alt mb-2"></i>
+            <h6>This Month’s Opportunities</h6>
+            <h2><t t-esc="state.this_month"/></h2>
+          </div>
+
+          <div t-on-click="openOverdueActivities" class="card metric-card card-danger animate__animated animate__fadeInUp">
+            <i class="fas fa-clock mb-2"></i>
+            <h6>Overdue Activities</h6>
+            <h2><t t-esc="state.overdue"/></h2>
+          </div>
+
+          <div t-on-click="openScheduledActivities" class="card metric-card card-warning animate__animated animate__fadeInUp">
+            <i class="fas fa-calendar-check mb-2"></i>
+            <h6>Scheduled Activities</h6>
+            <h2><t t-esc="state.scheduled"/></h2>
+          </div>
+
+          <div t-on-click="openExpectedRevenue" class="card metric-card card-success highlight animate__animated animate__fadeInUp">
+            <i class="fas fa-coins mb-2"></i>
+            <h6>Expected Revenue</h6>
+            <h2><t t-esc="state.expected_revenue.toLocaleString(undefined, {maximumFractionDigits: 0})"/> EGP</h2>
+          </div>
+
+          <div t-on-click="openWonOpportunities" class="card metric-card card-won animate__animated animate__fadeInUp">
+            <i class="fas fa-check-circle mb-2"></i>
+            <h6>Won Opportunities</h6>
+            <h2><t t-esc="state.won"/></h2>
+          </div>
+
+          <div t-on-click="openLostOpportunities" class="card metric-card card-danger animate__animated animate__fadeInUp">
+            <i class="fas fa-times-circle mb-2"></i>
+            <h6>Lost Opportunities</h6>
+            <h2><t t-esc="state.lost"/></h2>
+          </div>
+
+          <div class="card metric-card card-dark animate__animated animate__fadeInUp">
+            <i class="fas fa-percentage mb-2"></i>
+            <h6>Conversion Rate</h6>
+            <h2><t t-esc="state.conversion_rate"/>%</h2>
+          </div>
+
+          <div t-on-click="openDoctorAnalysis" class="card metric-card card-doctor animate__animated animate__fadeInUp">
+            <i class="fas fa-user-md mb-2"></i>
+            <h6>New Stage</h6>
+            <h2><t t-esc="state.new_stage"/></h2>
+          </div>
+
+          <div t-on-click="openAccountManagement" class="card metric-card card-account animate__animated animate__fadeInUp">
+            <i class="fas fa-briefcase mb-2"></i>
+            <h6>Proposition Stage </h6>
+            <h2><t t-esc="state.proposition_stage"/></h2>
+          </div>
+
+        </div>
+
+        <!-- Pie Chart Card: Salesperson Lead Distribution -->
+        <div class="card shadow p-4 mt-5 chart-card">
+          <h5 class="fw-bold text-center mb-4">Sales Team Number of Leads</h5>
+          <canvas t-ref="leadsPieChart" id="leadsPieChart" height="150"></canvas>
+        </div>
+
+        <div class="card shadow p-4 mt-5 chart-card">
+          <h5 class="fw-bold text-center mb-4">Lost Reasons Breakdown</h5>
+          <canvas t-ref="lostReasonsChart" id="lostReasonsChart" height="150"></canvas>
+        </div>
+
+      </div>
+    </section>
+  </t>
+</templates>

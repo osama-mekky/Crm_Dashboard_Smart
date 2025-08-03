@@ -1,0 +1,284 @@
+/* Default shared styles */
+.dashboard-wrapper {
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding-bottom: 2rem;
+  scroll-behavior: smooth;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Light mode (already fine) */
+.dashboard-wrapper.light-mode {
+  background: linear-gradient(135deg, #f3f4f9, #e0e7ff);}
+.dashboard-wrapper.light-mode .card h2,
+.dashboard-wrapper.light-mode .card h6,
+.dashboard-wrapper.light-mode .card i {
+  color: #212529; /* dark text for light bg */
+  
+}
+
+
+/* 🌙 Dark mode select option text */
+.dashboard-wrapper.dark-mode select,
+.dashboard-wrapper.dark-mode option {
+  color: white !important;
+  background-color: #2c2c3e !important; /* خلفية داكنة تناسب الوضع الليلي */
+}
+
+/* 🌤️ Light mode fallback */
+.dashboard-wrapper.light-mode select,
+.dashboard-wrapper.light-mode option {
+  color: black;
+  background-color: white;
+}
+
+.dashboard-wrapper.light-mode label.form-label {
+  color: #212529 !important; /* or black */
+}
+
+/* Dark mode: label text white */
+.dashboard-wrapper.dark-mode label.form-label {
+  color: #f8f9fa !important; /* or white */
+}
+
+/* Dark mode - make card text white */
+.dashboard-wrapper.dark-mode {
+  background: linear-gradient(135deg, #1e1e2f, #2c2c3e);}
+.dashboard-wrapper.dark-mode .card h2,
+.dashboard-wrapper.dark-mode .card h6,
+.dashboard-wrapper.dark-mode .card i {
+  color: #f8f9fa !important; /* white text for dark bg */
+}
+
+
+.dashboard-wrapper.light-mode select option {
+  color: #212529; /* dark text */
+  background-color: #fff;
+}
+
+
+.dashboard-wrapper.dark-mode select option {
+  color: #f8f9fa; /* light text */
+  background-color: #2c2c3e;
+}
+
+.dashboard-wrapper select option:first-child {
+  color: gray; /* optional: use #f8f9fa in dark mode via JS if needed */
+}
+/* Glassmorphism for Total Leads Card */
+.card-glass {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Responsive Grid Layout for Cards */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+
+
+/* Base Card Styling */
+.metric-card {
+  border-radius: 1rem;
+  padding: 1.25rem;
+  text-align: center;
+  color: white;
+  transition: all 0.25s ease-in-out;
+  cursor: pointer;
+}
+
+.metric-card i {
+  font-size: 1.8rem;
+  transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.metric-card:hover i {
+  transform: scale(1.2);
+}
+
+/* Color Themes */
+.card-primary    { background: linear-gradient(135deg, #6256a9, #7b68ee); }
+.card-accent     { background: linear-gradient(135deg, #04aec6, #3fd2eb); }
+.card-danger     { background: linear-gradient(135deg, #ff2d78, #e6004c); }
+.card-warning    { background: linear-gradient(135deg, #ffc107, #ff9f00); color: #222; }
+.card-success    { background: linear-gradient(135deg, #28a745, #5cd67c); }
+.card-info       { background: linear-gradient(135deg, #17a2b8, #4fd0e8); }
+.card-dark       { background: linear-gradient(135deg, #a5a0be, #7b68ee);}
+.card-won     { background: linear-gradient(135deg, #8eb425, #225f22);}
+.card-doctor     { background: linear-gradient(135deg, #821f96, #d10fc1);}
+.card-account     { background: linear-gradient(135deg, #251f5a, #1e08804d);}
+
+
+
+
+
+
+
+
+/* Highlight Glow Animation */
+@keyframes pulse-glow {
+  0%   { box-shadow: 0 0 0 rgba(255, 255, 255, 0.2); }
+  70%  { box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
+  100% { box-shadow: 0 0 0 rgba(255, 255, 255, 0.2); }
+}
+
+.metric-card.highlight {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Typography */
+.metric-card h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.metric-card h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+/* Responsive Typography */
+@media (max-width: 576px) {
+  .metric-card h2 {
+    font-size: 1.4rem;
+  }
+  .metric-card h6 {
+    font-size: 0.9rem;
+  }
+}
+
+
+.salesperson-filter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+}
+
+.dropdown-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #6c757d;
+  font-size: 1.2rem;
+  z-index: 2;
+}
+
+.modern-select {
+  padding-left: 2.5rem;
+  padding-right: 1rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  border-radius: 12px;
+  border: 1px solid #ced4da;
+  background-color: #fff;
+  appearance: none;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-weight: 500;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modern-select:focus {
+  border-color: #6256a9;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(98, 86, 169, 0.25);
+}
+
+
+.total-leads-modern {
+  background: linear-gradient(135deg, #f8f9fc, #e0e7ff);
+  border-radius: 1.5rem;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #dee2e6;
+}
+
+.total-leads-modern:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.lead-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.5rem;
+}
+
+.lead-count {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+}
+
+.icon-badge {
+  background: #6256a9;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(98, 86, 169, 0.3);
+  font-size: 2rem;
+}
+
+/* ========== Pie Chart Card ========== */
+.chart-card {
+  border-radius: 1.5rem;
+  background: #ffffff;
+  margin-top: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  padding: 1rem 1.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+
+.chart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.chart-card h5 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 1rem;
+}
+
+.chart-card canvas {
+  width: 100% !important;
+  max-width: 600px;
+  height: auto !important;
+  margin: 0 auto;
+  display: block;
+}
+
+
+/* Responsive chart sizing */
+@media (max-width: 768px) {
+  .chart-card canvas {
+    max-width: 100% !important;
+  }
+}
