@@ -22,6 +22,11 @@
 
     'version': '17.0.1.0.0',
 
+    'images': [
+        'static/description/icon.png',       # Main icon (also used as cover if no cover specified)
+        'static/description/cover.png',  # Example screenshot
+    ],
+    
 
     # any module necessary for this one to work correctly
     'depends': ['base','crm'],
