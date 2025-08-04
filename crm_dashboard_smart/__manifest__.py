@@ -53,8 +53,11 @@
     'demo': [
         'demo/demo.xml',
     ],
-
-    'license': 'LGPL-3',
+    
+    'price': 3.0,
+    'currency': 'USD',
+    'license': 'OPL-1',  # Required for paid apps
+    # 'license': 'LGPL-3',
     'application': True,
     'installable': True,
 }
