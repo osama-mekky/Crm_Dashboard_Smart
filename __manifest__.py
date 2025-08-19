@@ -42,6 +42,7 @@
             'crm_dashboard_smart/static/src/xml/dashboard.xml',
 
         ],
+		'web.assets_frontend':[],
     },
 
     # only loaded in demonstration mode
