@@ -21,6 +21,8 @@
     'category': 'Sales',
 
     'version': '17.0.1.0.0',
+	'price' : 1.00 ,
+	'currency' : 'USD'
 
 
     # any module necessary for this one to work correctly
