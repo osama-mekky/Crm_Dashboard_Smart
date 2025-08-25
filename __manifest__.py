@@ -19,6 +19,8 @@
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Sales',
+	'price' : 1.00 ,
+	'currency' : 'USD'
 
     'version': '17.0.1.0.0',
 
