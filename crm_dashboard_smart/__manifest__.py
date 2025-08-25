@@ -19,11 +19,14 @@
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Sales',
-	'price' : 1.00 ,
-	'currency' : 'USD'
 
     'version': '17.0.1.0.0',
 
+    'images': [
+        # 'static/description/icon.png',       # Main icon (also used as cover if no cover specified)
+        'static/description/cover.png',  # Example screenshot
+    ],
+    
 
     # any module necessary for this one to work correctly
     'depends': ['base','crm'],
@@ -44,15 +47,17 @@
             'crm_dashboard_smart/static/src/xml/dashboard.xml',
 
         ],
-		'web.assets_frontend':[],
     },
 
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
-
-    'license': 'LGPL-3',
+    
+    'price': 3.0,
+    'currency': 'USD',
+    'license': 'OPL-1',  # Required for paid apps
+    # 'license': 'LGPL-3',
     'application': True,
     'installable': True,
 }
